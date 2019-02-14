@@ -1,0 +1,9 @@
+son_of_liberty_news_get_post:
+  path: /{slug}
+  defaults: { _controller: SonOfLibertyNewsBundle:Post:getPost }
+  methods: [ GET ]
+
+son_of_liberty_news_list_posts:
+  path: /
+  defaults: { _controller: SonOfLibertyNewsBundle:Post:listPosts }
+  methods: [ GET ]

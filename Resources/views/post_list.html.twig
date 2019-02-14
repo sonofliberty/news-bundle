@@ -1,0 +1,11 @@
+<ul>
+    {% for post in posts %}
+        <li>
+            <a href="{{ path('son_of_liberty_news_get_post', {'slug': post.slug}) }}">
+                {{ post.title }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+
+{{ knp_pagination_render(posts) }}

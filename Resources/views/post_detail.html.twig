@@ -1,0 +1,10 @@
+<p>
+    <a href="{{ path('son_of_liberty_news_list_posts') }}">
+        {{ 'layout.back_to_list'|trans({}, 'SonOfLibertyNewsBundle') }}
+    </a>
+</p>
+
+<article>
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.content|raw}}</p>
+</article>
