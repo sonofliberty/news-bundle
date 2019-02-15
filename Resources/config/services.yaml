@@ -1,0 +1,23 @@
+services:
+
+  # sonata
+
+  son_of_liberty_news.sonata_admin.post_admin:
+    class: SonOfLiberty\NewsBundle\Sonata\Admin\PostAdmin
+    arguments: [~, SonOfLiberty\NewsBundle\Entity\Post, ~, '%kernel.bundles%', '%sol_news.author.class%']
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: Posts }
+
+  son_of_liberty_news.sonata_seo.seo_subscriber:
+    class: SonOfLiberty\NewsBundle\Sonata\Seo\SeoSubscriber
+    arguments: ['@?sonata.seo.page.default']
+    tags:
+      - { name: kernel.event_subscriber }
+
+  # doctrine
+
+  son_of_liberty_news.doctrine_subscriber.post_subscriber:
+    class: SonOfLiberty\NewsBundle\Doctrine\Subscriber\PostSubscriber
+    arguments: ['%sol_news.author.class%', '@?sonata.core.slugify.cocur']
+    tags:
+      - { name: doctrine.event_subscriber }

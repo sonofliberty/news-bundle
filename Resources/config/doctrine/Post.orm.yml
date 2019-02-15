@@ -1,0 +1,51 @@
+SonOfLiberty\NewsBundle\Entity\Post:
+  repositoryClass: SonOfLiberty\NewsBundle\Repository\Post
+  type: entity
+  table: "sol_news_post"
+  gedmo:
+    translation:
+      locale: locale
+  indexes:
+    idx:
+      columns: [ slug ]
+  id:
+    id:
+      type: string
+      generator:
+        strategy: UUID
+  fields:
+    title:
+      type: text
+      gedmo:
+        - translatable
+    slug:
+      type: string
+      length: 255
+      unique: true
+      gedmo:
+        slug:
+          fields: [ title ]
+          updatable: false
+    image:
+      type: string
+      nullable: true
+    content:
+      type: text
+      gedmo:
+        - translatable
+    published:
+      type: boolean
+    publicFrom:
+      type: datetime
+      nullable: true
+    publicUntil:
+      type: datetime
+      nullable: true
+    createdAt:
+      type: datetime
+    updatedAt:
+      type: datetime
+      nullable: true
+  lifecycleCallbacks:
+    prePersist: [ prePersist ]
+    preUpdate: [ preUpdate ]
