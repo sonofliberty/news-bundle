@@ -36,7 +36,7 @@ use SonOfLiberty\NewsBundle\Entity\Post;
 class PostSubscriber implements EventSubscriber
 {
     /**
-     * @var string
+     * @var string|null
      */
     private $authorClass;
 
@@ -47,10 +47,10 @@ class PostSubscriber implements EventSubscriber
 
     /**
      * PostSubscriber constructor.
-     * @param string $authorClass
+     * @param string|null $authorClass
      * @param SlugifyInterface|null $slugify
      */
-    public function __construct(string $authorClass, ?SlugifyInterface $slugify)
+    public function __construct(?string $authorClass, ?SlugifyInterface $slugify)
     {
         $this->authorClass = $authorClass;
         $this->slugify = $slugify;
@@ -62,7 +62,7 @@ class PostSubscriber implements EventSubscriber
     public function loadClassMetadata(LoadClassMetadataEventArgs $args)
     {
         $metadata = $args->getClassMetadata();
-        if ($metadata->getName() !== Post::class) {
+        if ($metadata->getName() !== Post::class || !$this->authorClass) {
             return;
         }
 

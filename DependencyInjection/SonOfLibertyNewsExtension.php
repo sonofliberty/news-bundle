@@ -51,7 +51,7 @@ class SonOfLibertyNewsExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('sol_news.author.class', $config['author']['class']);
+        $container->setParameter('sol_news.author.class', isset($config['author']['class']) ? $config['author']['class'] : null);
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yaml');

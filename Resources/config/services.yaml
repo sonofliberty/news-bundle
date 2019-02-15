@@ -4,7 +4,7 @@ services:
 
   son_of_liberty_news.sonata_admin.post_admin:
     class: SonOfLiberty\NewsBundle\Sonata\Admin\PostAdmin
-    arguments: [~, SonOfLiberty\NewsBundle\Entity\Post, ~, '%kernel.bundles%']
+    arguments: [~, SonOfLiberty\NewsBundle\Entity\Post, ~, '%kernel.bundles%', '%sol_news.author.class%']
     tags:
       - { name: sonata.admin, manager_type: orm, label: Posts }
 

@@ -37,16 +37,23 @@ class PostAdmin extends AbstractAdmin
     private $bundles = [];
 
     /**
+     * @var string|null
+     */
+    private $authorClass;
+
+    /**
      * PostAdmin constructor.
      * @param string $code
      * @param string $class
      * @param string $baseControllerName
      * @param array $bundles
+     * @param string|null $authorClass
      */
-    public function __construct(string $code, string $class, string $baseControllerName, array $bundles)
+    public function __construct(string $code, string $class, string $baseControllerName, array $bundles, ?string $authorClass)
     {
         parent::__construct($code, $class, $baseControllerName);
         $this->bundles = $bundles;
+        $this->authorClass = $authorClass;
     }
 
     /**
@@ -57,6 +64,7 @@ class PostAdmin extends AbstractAdmin
         $list->addIdentifier('title');
         $list->add('author');
         $list->add('createdAt');
+        $list->add('published', null, ['editable' => true]);
     }
 
     /**
@@ -79,6 +87,9 @@ class PostAdmin extends AbstractAdmin
         $form->end();
 
         $form->with('Details', ['class' => 'col-md-4']);
+        if ($this->authorClass && class_exists($this->authorClass)) {
+            $form->add('author');
+        }
         $form->add('published');
         $form->add('publicFrom');
         $form->add('publicUntil');

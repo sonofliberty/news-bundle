@@ -34,9 +34,9 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->arrayNode('author')->isRequired()
+                ->arrayNode('author')
                     ->children()
-                        ->scalarNode('class')->isRequired()->end()
+                        ->scalarNode('class')->defaultValue(null)->end()
                     ->end()
                 ->end()
             ->end();
