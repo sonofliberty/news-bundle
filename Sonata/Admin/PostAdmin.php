@@ -79,10 +79,11 @@ class PostAdmin extends AbstractAdmin
         if ($post->getId()) {
             $form->add('slug', TextType::class);
         }
+
+        $form->add('title', TextType::class);
         if (in_array(VichUploaderBundle::class, $this->bundles)) {
             $form->add('imageFile', VichImageType::class);
         }
-        $form->add('title', TextType::class);
         $form->add('content', TextareaType::class, ['attr' => ['class' => 'tinymce', 'data-theme' => 'advanced', 'rows' => 15]]);
         $form->end();
 
