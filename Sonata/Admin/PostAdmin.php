@@ -62,7 +62,9 @@ class PostAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $list)
     {
         $list->addIdentifier('title');
-        $list->add('author');
+        if ($this->authorClass && class_exists($this->authorClass)) {
+            $list->add('author');
+        }
         $list->add('createdAt');
         $list->add('published', null, ['editable' => true]);
     }
@@ -72,17 +74,11 @@ class PostAdmin extends AbstractAdmin
      */
     protected function configureFormFields(FormMapper $form)
     {
-        /** @var Post|null $post */
-        $post = $this->getSubject();
-
         $form->with('General', ['class' => 'col-md-8', 'box_class' => 'box box-solid']);
-        if ($post->getId()) {
-            $form->add('slug', TextType::class);
-        }
-
         $form->add('title', TextType::class);
+        $form->add('slug', TextType::class, ['required' => false]);
         if (in_array(VichUploaderBundle::class, $this->bundles)) {
-            $form->add('imageFile', VichImageType::class);
+            $form->add('imageFile', VichImageType::class, ['required' => false]);
         }
         $form->add('content', TextareaType::class, ['attr' => ['class' => 'tinymce', 'data-theme' => 'advanced', 'rows' => 15]]);
         $form->end();

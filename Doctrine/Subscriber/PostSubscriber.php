@@ -82,8 +82,6 @@ class PostSubscriber implements EventSubscriber
      */
     public function prePersist(LifecycleEventArgs $args)
     {
-        return;
-
         /** @var Post|mixed $object */
         $object = $args->getObject();
         if (!($object instanceof Post) || !($this->slugify instanceof SlugifyInterface)) {
