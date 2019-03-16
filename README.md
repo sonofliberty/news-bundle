@@ -1,5 +1,7 @@
 # news-bundle
 
+[![Build Status](https://travis-ci.com/sonofliberty/news-bundle.svg?branch=develop)](https://travis-ci.com/sonofliberty/news-bundle)
+
 Symfony bundle with simple blog / publishing features
 
 ## Installation
